@@ -21,7 +21,7 @@ func requestHandler(rw http.ResponseWriter, r *http.Request) {
 	// Get Request on CURL:  curl "http://127.0.0.1:8080/?paramA=1&paramB=abcd&paramC=-1"
 	// Post Request on CURL curl -X POST http://127.0.0.1:8080/ -d '{"paramA": 100, "paramB":"qwert", "paramC":11}'
 
-	if r.Method == "GET" {
+	if r.Method == http.MethodGet {
 
 		fmt.Println("New Get Request Detected, query data is as follows:")
 		fmt.Fprintln(rw, "Get Request Detected\n, Now Echoing:")
@@ -46,9 +46,9 @@ func requestHandler(rw http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(rw, stringStruct)
 		fmt.Println(stringStruct)
 
-	} else if r.Method == "POST" {
-		fmt.Println("New Get Request Detected, query data is as follows:")
-		fmt.Fprintln(rw, "Get Request Detected\n, Now Echoing:")
+	} else if r.Method == http.MethodPost {
+		fmt.Println("New Post Request Detected, query data is as follows:")
+		fmt.Fprintln(rw, "Post Request Detected\n, Now Echoing:")
 
 		decoder := json.NewDecoder(r.Body)
 		var data sampleStruct
